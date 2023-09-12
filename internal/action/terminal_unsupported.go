@@ -1,4 +1,5 @@
-// +build !linux,!darwin,!freebsd,!dragonfly,!openbsd_amd64
+//go:build (!linux && !darwin && !freebsd && !dragonfly && !openbsd_amd64 && ignore) || !windows
+// +build !linux,!darwin,!freebsd,!dragonfly,!openbsd_amd64,ignore !windows
 
 package action
 

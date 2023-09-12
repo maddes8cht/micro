@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strconv"
 	"strings"
 
@@ -899,8 +900,12 @@ func (h *BufPane) TermCmd(args []string) {
 	if len(args) == 0 {
 		sh := os.Getenv("SHELL")
 		if sh == "" {
-			InfoBar.Error("Shell environment not found")
-			return
+			if runtime.GOOS == "windows" {
+				sh = "cmd.exe" // Verwenden Sie den Pfad zur gewünschten Standard-Shell unter Windows
+			} else {
+				InfoBar.Error("Shell environment not found")
+				return
+			}
 		}
 		args = []string{sh}
 	}
